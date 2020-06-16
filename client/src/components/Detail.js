@@ -1,19 +1,19 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-
+import comicsApi from '../utils/api/comics'
 
 const Detail = ({ match }) => {
 
     useEffect(() => {   
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
     
     const [comic, setComic] = useState({});
 
     const fetchData = async () => {
         try{
-          let response = await axios.get(`https://terrybro61.eu.pythonanywhere.com/comics/${match.params.id}`);
+          let response = await comicsApi.get(match.params.id);
           setComic(response.data);
         } catch(error) {
           console.log("error", error);
@@ -22,7 +22,7 @@ const Detail = ({ match }) => {
 
 
     return (
-        <h1><img src={comic.cover} /></h1>
+        <h1><img src={comic.cover} alt="cover" /></h1>
     )
 }
 

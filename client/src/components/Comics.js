@@ -1,8 +1,8 @@
 import React,{useState, useEffect} from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Comic from './Comic.js';
 import Search from './Search'
+import comicsApi from '../utils/api/comics'
 
 function Comics() {
 
@@ -11,7 +11,7 @@ function Comics() {
 
   const fetchData = async () => {
     try{
-      let response = await axios.get('https://terrybro61.eu.pythonanywhere.com/comics/');
+      let response = await comicsApi.get();
       setComics(response.data);
     } catch(error) {
       console.log("error", error);
