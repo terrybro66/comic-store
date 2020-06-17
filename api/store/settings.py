@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'comics',
     'corsheaders',
     'django_seed'
+    
 ]
 
 MIDDLEWARE = [

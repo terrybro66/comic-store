@@ -4,7 +4,7 @@ The  name of the project is comic-store
 
 This is an online store for selling comics
 
-Seeding the database install django-seed
+Seeding the database - install django-seed
 
 ##  pip install django-seed
 
