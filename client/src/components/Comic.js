@@ -1,16 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
-    Card
-  } from './styledComponents'
+  Card
+} from './styledComponents'
 
-const Comic = ({ name, description, cover, price}) => {
+
+const Comic = ({comics}) => {
+  {console.log(comics)}
   return (
-    <Card>
-        <img alt='cover' src={cover} width="180px"/>        
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <p>{'\u00A3'}{price}</p>
-    </Card>
+    <div>
+      {
+        comics.map((comic, i) => {
+          return (
+            <Card>
+              <Link to={`/${comic.id}`} key={comic.id}>          
+                <h3>{comic.name} </h3>
+                {comic.description} 
+                <img src={comic.cover} />
+                {comic.price}
+              </Link>
+            </Card>
+          )
+        })  
+      }
+    </div>
   );
 }
 

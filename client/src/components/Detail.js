@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import comicsApi from '../utils/api/comics'
+import axios from 'axios'
 
 const Detail = ({ match }) => {
 
@@ -13,17 +14,21 @@ const Detail = ({ match }) => {
 
     const fetchData = async () => {
         try{
-          let response = await comicsApi.get(match.params.id);
+          let response = await axios.get(comicsApi + match.params.id);
           setComic(response.data);
+
         } catch(error) {
           console.log("error", error);
         }
     }
 
-
     return (
+      <div>
         <h1><img src={comic.cover} alt="cover" /></h1>
+
+      </div>
     )
 }
 
 export default Detail;
+
