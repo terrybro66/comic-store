@@ -1,8 +1,7 @@
 import React from 'react'
 
 
-const Loading = (data) => {
-    console.log(data)
+const Loading = () => {
 
     return (
         <span>Loading</span>

@@ -1,21 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const Pagination = ({ comics, page }) => {
-
+const Pagination = ({ comics, page, nextPage }) => {
   const pageNumbers = [];
-  const [btnStyle, setBtnStyle] = useState({ bgColor: "blue" });
+  let currPage = 1;
 
-  for (let i = 1; i <= Math.ceil(comics / 8); i++) {
+  for (let i = 1; i <= Math.ceil(comics / 4); i++) {
     pageNumbers.push(i);
   }
 
-  const changePage = (num) => {
-    page(num);
+  if (nextPage) {
+    nextPage = parseInt(nextPage.split("=")[1]);
+    currPage = nextPage - 1;
+  } else {
+    currPage = pageNumbers.slice(-1).pop();
+  }
+
+  const stepPage = (val) => {
+    if (val === ">" && nextPage) {
+      page(nextPage);
+    }
+
+    if (val === "<" && currPage > 1) {
+      nextPage = currPage - 1;
+      page(nextPage);
+    }
   };
 
   const setPage = (event) => {
-    let num = event.target.value;
-    changePage(num)
+    let val = event.target.value;
+    Number.isInteger(parseInt(val)) ? page(val) : stepPage(val);
   };
 
   return (

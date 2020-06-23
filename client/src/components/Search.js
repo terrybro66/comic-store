@@ -1,10 +1,10 @@
 import React from "react";
-import Filter from "./Filter";
 import { SearchComics } from "./styledComponents";
 
 const Search = (props) => {
   const changeStuff = (event) => {
-    props.filter(event.target.value);
+
+
   };
 
   return (
@@ -12,9 +12,9 @@ const Search = (props) => {
       <SearchComics
         type="search"
         placeholder="search comics"
-        onChange={changeStuff}
         value={props.searchText}
       />
+      {/* <button onClick={changeStuff(event)}>search</button> */}
     </div>
   );
 };

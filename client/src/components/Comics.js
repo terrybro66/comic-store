@@ -1,5 +1,4 @@
 import React,{useState, useEffect, Fragment} from 'react';
-import { Link } from 'react-router-dom';
 import Comic from './Comic.js';
 import Search from './Search';
 import comicsApi from '../utils/api/comics';
@@ -11,15 +10,20 @@ function Comics() {
 
   const [comics, setComics] = useState([]);
   const [pages, setPages] = useState({});
-  const [isComics, setIsComics] = useState(true)
+  const [nextPage, setNextPage] = useState("");
   const [searchString, setSearchString] = useState("");
 
   const fetchData = async (page) => {
-    let api = comicsApi + '?page=' + page;
+    console.log(typeof page)
+    let api = "";
+    typeof (parseInt(page)) == "string" ? api = comicsApi + '?' + page : api = comicsApi + '?page=' + page;
+
+   // let api = comicsApi + '?page=' + page;
     try{
       let response = await axios.get(api);
       setComics(response.data.results);
-      setPages(response.data);
+      setPages(response.data.count);
+      setNextPage(response.data.next)
      
     } catch(error) {
       console.log("error", error);
@@ -28,22 +32,22 @@ function Comics() {
 
   useEffect(() => {   
     fetchData(1);
-    setIsComics(false)
   }, []);
 
   const setPage = (page) => {
     fetchData(page)
   };
 
+
   return (
     <div>
-    {isComics ? (
+    {comics.length === 0 ? (
       <Loading/>
     ) : (
       <Fragment>
         <Search/>
         <Comic comics = {comics}/>
-        <Pagination comics={pages.count} page={setPage}/>
+        <Pagination comics={pages} page={setPage} nextPage={nextPage} />
       </Fragment>
       )
     } 

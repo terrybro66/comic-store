@@ -6,17 +6,16 @@ import {
 
 
 const Comic = ({comics}) => {
-  {console.log(comics)}
   return (
     <div>
       {
         comics.map((comic, i) => {
           return (
-            <Card>
+            <Card key={comic.id}>
               <Link to={`/${comic.id}`} key={comic.id}>          
                 <h3>{comic.name} </h3>
                 {comic.description} 
-                <img src={comic.cover} />
+                <img src={comic.cover} alt="cover"/>
                 {comic.price}
               </Link>
             </Card>
