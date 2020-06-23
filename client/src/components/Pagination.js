@@ -15,7 +15,8 @@ const Pagination = ({ comics, page, nextPage }) => {
     currPage = pageNumbers.slice(-1).pop();
   }
 
-  const stepPage = (val) => {
+  const stepPage = (event) => {
+    let val = event.target.value;
     if (val === ">" && nextPage) {
       page(nextPage);
     }
@@ -28,16 +29,16 @@ const Pagination = ({ comics, page, nextPage }) => {
 
   const setPage = (event) => {
     let val = event.target.value;
-    Number.isInteger(parseInt(val)) ? page(val) : stepPage(val);
+    page(val);
   };
 
   return (
     <div>
-      <input type="button" value="<" onClick={setPage} />
+      <input type="button" value="<" onClick={stepPage} />
       {pageNumbers.map((number) => (
         <input type="button" value={number} onClick={setPage} key={number} />
       ))}
-      <input type="button" value=">" onClick={setPage} />
+      <input type="button" value=">" onClick={stepPage} />
     </div>
   );
 };
