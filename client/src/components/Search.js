@@ -1,20 +1,21 @@
 import React from "react";
 import { SearchComics } from "./styledComponents";
 
-const Search = ({searchChange}) => {
-
-  const changeStuff = () => {
-    const searchWord = document.getElementById('searchId');
-    searchChange(searchWord.value)
+const Search = ({ searchChange }) => {
+  const searchComics = () => {
+    const searchWord = document.getElementById("searchId");
+    searchChange(searchWord.value);
   };
 
   return (
     <div>
-      <SearchComics id="searchId"
+      <SearchComics
+        id="searchId"
         type="search"
         placeholder="search comics"
+        onsearch="searchComics"
       />
-      <button onClick={changeStuff}>search</button>
+      <button onClick={searchComics}>search</button>
     </div>
   );
 };

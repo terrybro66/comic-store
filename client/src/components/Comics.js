@@ -13,9 +13,10 @@ function Comics() {
   const [searchString, setSearchString] = useState("");
 
   const fetchData = async (page) => {
-    let api = comicsApi + searchString + "?page=" + page;
-    console.log(api)
-    setSearchString("");
+    let api = "";
+    searchString === ""
+      ? (api = comicsApi + "?page=" + page)
+      : (api = comicsApi + searchString + page);
 
     try {
       let response = await axios.get(api);
@@ -31,10 +32,12 @@ function Comics() {
     fetchData(1);
   }, []);
 
-  const onSearch = (word) => {
-    setSearchString("?search" + word);
-    console.log("!!!!", searchString )
+  useEffect(() => {
     fetchData(1);
+  }, [searchString]);
+
+  const onSearch = (word) => {
+    setSearchString("?search=" + word + "&page=");
   };
 
   const setPage = (page) => {
