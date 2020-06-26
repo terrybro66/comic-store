@@ -4,6 +4,7 @@ from comics.models import Comic
 import os, sys
 from . import data
 import logging
+from faker import Faker
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -28,14 +29,15 @@ def clear_data():
     Comic.objects.all().delete()
 
 def create_comic():
+    fake = Faker()
 
     comic = Comic(
         # the random values are imported from data.py
         name=random.choice(data.names),
         publisher=random.choice(data.publishers),
-        description=random.choice(data.descriptions),
+        description=fake.paragraph(nb_sentences=10, variable_nb_sentences=True),
         cover=random.choice(data.covers),
-        price=9.99
+        price=random.uniform(0, 99)
     )
 
     comic.save()
