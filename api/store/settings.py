@@ -74,7 +74,7 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'comics.pagination.PageNumberPaginationWithCount',
     'PAGE_SIZE': 4
 }
 

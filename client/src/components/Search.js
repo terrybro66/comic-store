@@ -1,10 +1,20 @@
 import React from "react";
 import { SearchComics } from "./styledComponents";
+import { useState } from "react";
 
-const Search = ({ searchChange }) => {
-  const searchComics = () => {
-    const searchWord = document.getElementById("searchId");
-    searchChange(searchWord.value);
+const Search = ({ onSubmit }) => {
+  const [searchString, setSearchString] = useState("test");
+
+  const handleSubmit = () => {
+    onSubmit(searchString);
+  };
+
+  const handleChange = ({ target }) => {
+    setSearchString(target.value);
+  };
+
+  const handleKeyDown = ({ key }) => {
+    if (key === "Enter") handleSubmit();
   };
 
   return (
@@ -14,8 +24,11 @@ const Search = ({ searchChange }) => {
         type="search"
         placeholder="search comics"
         onsearch="searchComics"
+        value={searchString}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
-      <button onClick={searchComics}>search</button>
+      <button onClick={handleSubmit}>search</button>
     </div>
   );
 };

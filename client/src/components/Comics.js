@@ -1,60 +1,67 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import Comic from "./Comic.js";
 import Search from "./Search";
 import comicsApi from "../utils/api/comics";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
-import axios from "axios";
 
 function Comics() {
   const [comics, setComics] = useState([]);
-  const [pages, setPages] = useState({});
-  const [nextPage, setNextPage] = useState("");
   const [searchString, setSearchString] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchData = async (page) => {
-    let api = "";
-    searchString === ""
-      ? (api = comicsApi + "?page=" + page)
-      : (api = comicsApi + searchString + page);
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, searchString]);
 
+  const fetchData = async () => {
+    setIsLoading(true);
     try {
-      let response = await axios.get(api);
+      const response = await comicsApi.get("", {
+        params: {
+          page: currentPage,
+          search: searchString,
+        },
+      });
       setComics(response.data.results);
-      setPages(response.data.count);
-      setNextPage(response.data.next);
-    } catch (error) {
-      console.log("error", error);
+      setPageCount(response.data.total_pages);
+    } catch (e) {
+      console.log(e);
     }
+    setIsLoading(false);
   };
 
-  useEffect(() => {
-    fetchData(1);
-  }, []);
-
-  useEffect(() => {
-    fetchData(1);
-  }, [searchString]);
-
-  const onSearch = (word) => {
-    setSearchString("?search=" + word + "&page=");
+  const handleSearch = (term) => {
+    setCurrentPage(1);
+    setSearchString(term);
   };
 
-  const setPage = (page) => {
-    fetchData(page);
+  const renderContent = () => {
+    if (isLoading) return <Loading />;
+    if (comics.length === 0) return <div>No results found</div>;
+    return (
+      <div>
+        {comics.map((comic) => (
+          <Comic data={comic} key={`Comic-${comic.id}`} />
+        ))}
+        {pageCount && (
+          <Pagination
+            pageCount={pageCount}
+            onUpdate={setCurrentPage}
+            currentPage={currentPage}
+          />
+        )}
+      </div>
+    );
   };
 
   return (
     <div>
-      {comics.length === 0 ? (
-        <Loading />
-      ) : (
-        <Fragment>
-          <Search searchChange={onSearch} />
-          <Comic comics={comics} />
-          <Pagination comics={pages} page={setPage} nextPage={nextPage} />
-        </Fragment>
-      )}
+      <Search onSubmit={handleSearch} />
+      {renderContent()}
     </div>
   );
 }

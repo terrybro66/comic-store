@@ -1,6 +1,12 @@
-const DEV_URL = 'http://localhost:8000'
-const PROD_URL = 'https://terrybro61.eu.pythonanywhere.com'
+import axios from "axios";
 
-const instance = `${process.env.NODE_ENV === "production" ? PROD_URL : DEV_URL}/comics/`;
+const DEV_URL = "http://localhost:8000";
+const PROD_URL = "https://terrybro61.eu.pythonanywhere.com";
 
-export default instance
+const instance = axios.create({
+  baseURL: `${
+    process.env.NODE_ENV === "production" ? PROD_URL : DEV_URL
+  }/comics/`,
+});
+
+export default instance;

@@ -1,44 +1,52 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
-const Pagination = ({ comics, page, nextPage }) => {
-  const pageNumbers = [];
-  let currPage = 1;
+const PaginationButton = ({ value, onClick, isActive, isDisabled }) => {
+  return (
+    <input
+      type="button"
+      value={value}
+      disabled={isDisabled}
+      onClick={onClick}
+      style={{
+        backgroundColor: isActive ? "red" : "",
+      }}
+    />
+  );
+};
 
-  for (let i = 1; i <= Math.ceil(comics / 4); i++) {
-    pageNumbers.push(i);
-  }
+const Pagination = ({ pageCount, onUpdate, currentPage }) => {
+  const [pageNums, setPageNums] = useState([]);
 
-  if (nextPage) {
-    nextPage = parseInt(nextPage.split("=")[1]);
-    currPage = nextPage - 1;
-  } else {
-    currPage = pageNumbers.slice(-1).pop();
-  }
-
-  const stepPage = (event) => {
-    let val = event.target.value;
-    if (val === ">" && nextPage) {
-      page(nextPage);
+  useEffect(() => {
+    const nums = [];
+    for (let i = 1; i <= pageCount; i++) {
+      nums.push(i);
     }
-
-    if (val === "<" && currPage > 1) {
-      nextPage = currPage - 1;
-      page(nextPage);
-    }
-  };
-
-  const setPage = (event) => {
-    let val = event.target.value;
-    page(val);
-  };
+    setPageNums(nums);
+  }, [pageCount]);
 
   return (
     <div>
-      <input type="button" value="<" onClick={stepPage} />
-      {pageNumbers.map((number) => (
-        <input type="button" value={number} onClick={setPage} key={number} />
+      <PaginationButton
+        value="<"
+        onClick={() => onUpdate(currentPage - 1)}
+        isDisabled={currentPage < 2}
+      />
+      {pageNums.map((num, i) => (
+        <PaginationButton
+          value={num}
+          onClick={() => onUpdate(num)}
+          key={`PageLink-${num}`}
+          isActive={currentPage === num}
+        />
       ))}
-      <input type="button" value=">" onClick={stepPage} />
+
+      <PaginationButton
+        value=">"
+        onClick={() => onUpdate(currentPage + 1)}
+        isDisabled={currentPage >= pageNums.length}
+      />
     </div>
   );
 };
