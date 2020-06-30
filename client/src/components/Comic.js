@@ -1,17 +1,16 @@
-import React from 'react';
-import {
-    Card
-  } from './styledComponents'
+import React from "react";
+import { Link } from "react-router-dom";
+import { Card } from "./styledComponents";
 
-const Comic = ({ name, description, cover, price}) => {
-  return (
-    <Card>
-        <img alt='cover' src={cover} width="180px"/>        
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <p>{'\u00A3'}{price}</p>
-    </Card>
-  );
-}
+const Comic = ({ data: { id, name, description, cover, price } }) => (
+  <Card>
+    <Link to={`/comics/${id}`}>
+      <h3>{name} </h3>
+      {description}
+      <img src={cover} alt="cover" />
+      {price}
+    </Link>
+  </Card>
+);
 
 export default Comic;

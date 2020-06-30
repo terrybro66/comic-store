@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'comics',
     'corsheaders',
     'django_seed'
-    
 ]
 
 MIDDLEWARE = [
@@ -73,6 +72,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'comics.pagination.PageNumberPaginationWithCount',
+    'PAGE_SIZE': 4
+}
+
 
 WSGI_APPLICATION = 'store.wsgi.application'
 
@@ -123,10 +128,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL ='/media/'
-
-
+MEDIA_URL = '/media/'

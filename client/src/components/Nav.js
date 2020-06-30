@@ -2,7 +2,6 @@ import React from 'react'
 import { NavSt } from './styledComponents'
 import { Link } from 'react-router-dom'
 
-
 const Nav = () => {
 
 
@@ -10,10 +9,10 @@ const Nav = () => {
         <ul>
             <NavSt>
                 <Link to='/'>
-                    <li>Home</li>
+                    Home
                 </Link>
                 <Link to='/profile'>
-                    <li>Profile</li>
+                    Profile
                 </Link> 
             </NavSt>
                        

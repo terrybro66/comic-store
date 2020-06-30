@@ -1,19 +1,36 @@
-import React from 'react'
-import Filter from './Filter'
-import { SearchComics } from './styledComponents'
+import React from "react";
+import { SearchComics } from "./styledComponents";
+import { useState } from "react";
 
-const Search = (props) => {
-    const changeStuff = event =>{
-            props.filter(event.target.value);
-        
-    }
+const Search = ({ onSubmit }) => {
+  const [searchString, setSearchString] = useState("test");
 
-    return ( 
-        <div>
-            <Filter />
-            <SearchComics type='search' placeholder='search comics' onChange={changeStuff} value={props.searchText} />
-        </div>
-    )
-}
+  const handleSubmit = () => {
+    onSubmit(searchString);
+  };
+
+  const handleChange = ({ target }) => {
+    setSearchString(target.value);
+  };
+
+  const handleKeyDown = ({ key }) => {
+    if (key === "Enter") handleSubmit();
+  };
+
+  return (
+    <div>
+      <SearchComics
+        id="searchId"
+        type="search"
+        placeholder="search comics"
+        onsearch="searchComics"
+        value={searchString}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
+      <button onClick={handleSubmit}>search</button>
+    </div>
+  );
+};
 
 export default Search;
