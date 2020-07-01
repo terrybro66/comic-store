@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./Comic.module.css";
+import styles from "./Comic.module.scss";
 
 const Comic = ({ data: { id, name, description, cover, price } }) => (
-  <div className={styles["comic-block"]}>
+  <div className={styles["comic"]}>
     <Link to={`/comics/${id}`}>
-      <img src={cover} alt="cover" className={styles["comic-cover"]} />
+      <img src={cover} alt="cover" className={styles["comic__cover"]} />
     </Link>
-    <div className={styles["comic-description"]}>{description}</div>
-    <div className={styles["comic-price"]}>&pound;{price}</div>
-    <button className={styles["comic-buy-button"]}>BUY NOW</button>
+    <div className={styles["comic__description"]}>{description}</div>
+    <div className={styles["comic__price"]}>&pound;{price}</div>
+    <button className={styles["comic__buy-button"]}>BUY NOW</button>
   </div>
 );
 
