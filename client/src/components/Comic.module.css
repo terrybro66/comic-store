@@ -1,0 +1,32 @@
+.comic-block {
+  padding: 12px;
+  text-align: center;
+  width: 180px;
+}
+.comic-cover {
+  max-height: 220px;
+}
+.comic-description {
+  padding: 1.6rem 0 0;
+  font-size: 1.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.comic-price {
+  font-weight: 900;
+  font-size: 1.8rem;
+  font-style: italic;
+  padding-top: 1.2rem;
+}
+.comic-buy-button {
+  font-size: 1.3rem;
+  padding: 1.4rem 3.6rem;
+  color: #fff;
+  font-weight: 900;
+  background-color: green;
+  border-radius: 0.4rem;
+  border: none;
+  margin: 0.6rem 0 0;
+}

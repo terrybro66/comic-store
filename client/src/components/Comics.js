@@ -38,15 +38,20 @@ function Comics() {
     setCurrentPage(1);
     setSearchString(term);
   };
+  const comicsContainer = { display: "flex", justifyContent: "center" };
+  const comicsHeader = { textAlign: "left" };
 
   const renderContent = () => {
     if (isLoading) return <Loading />;
     if (comics.length === 0) return <div>No results found</div>;
     return (
       <div>
-        {comics.map((comic) => (
-          <Comic data={comic} key={`Comic-${comic.id}`} />
-        ))}
+        <h1 style={comicsHeader}>Your Results</h1>
+        <div style={comicsContainer}>
+          {comics.map((comic) => (
+            <Comic data={comic} key={`Comic-${comic.id}`} />
+          ))}
+        </div>
         {pageCount && (
           <Pagination
             pageCount={pageCount}

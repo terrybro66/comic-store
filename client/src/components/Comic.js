@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card } from "./styledComponents";
+import styles from "./Comic.module.css";
 
 const Comic = ({ data: { id, name, description, cover, price } }) => (
-  <Card>
+  <div className={styles["comic-block"]}>
     <Link to={`/comics/${id}`}>
-      <h3>{name} </h3>
-      {description}
-      <img src={cover} alt="cover" />
-      {price}
+      <img src={cover} alt="cover" className={styles["comic-cover"]} />
     </Link>
-  </Card>
+    <div className={styles["comic-description"]}>{description}</div>
+    <div className={styles["comic-price"]}>&pound;{price}</div>
+    <button className={styles["comic-buy-button"]}>BUY NOW</button>
+  </div>
 );
 
 export default Comic;
