@@ -1,0 +1,77 @@
+.detail {
+  padding: 12px;
+  text-align: left;
+  width: 1084px;
+  display: flex;
+
+  &__col1 {
+    display: flex;
+    height: 100vh;
+    flex: 1;
+    flex-direction: column;
+  }
+  &__col2 {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+  }
+
+  &__cover {
+    max-height: 220px;
+    width: auto;
+    transition: all 0.2s ease-in-out;
+    line-height: 2rem;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    padding-bottom: 1rem;
+  }
+
+  &__price {
+    color: #01a418;
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1.3rem;
+  }
+
+  &__instock {
+    color: #01a418;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    font-weight: 900;
+  }
+
+  &__buy-button {
+    font-size: 1.3rem;
+    padding: 1.4rem 6.6rem;
+    color: #fff;
+    font-weight: 900;
+    background-color: #01a418;
+    border-radius: 0.4rem;
+    border: none;
+    margin: 0.6rem 0;
+  }
+
+  &__buy-button:hover {
+    cursor: pointer;
+  }
+
+  &__description {
+    padding: 1.8rem;
+    border-radius: 0.8rem;
+    border: solid 1px #ddd;
+    line-height: 2rem;
+    margin-top: 3.6rem;
+  }
+
+  &__description-heading {
+    margin-top: 0.1rem;
+    font-size: 1.5rem;
+    padding: 0 0 1rem 0;
+    border-bottom: solid 1px #ddd;
+  }
+}

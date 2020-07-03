@@ -2,12 +2,23 @@
   padding: 12px;
   text-align: center;
   width: 180px;
+  height: 360px;
+
+  .comic:hover {
+    transform: scale(1.1);
+  }
 
   &__cover {
     max-height: 220px;
+    width: auto;
+    transition: all 0.2s ease-in-out;
   }
 
-  &__description {
+  &__cover:hover {
+    transform: scale(1.1);
+  }
+
+  &__name {
     padding: 1.6rem 0 0;
     font-size: 1.2rem;
     display: -webkit-box;
@@ -28,9 +39,13 @@
     padding: 1.4rem 3.6rem;
     color: #fff;
     font-weight: 900;
-    background-color: green;
+    background-color: #01a418;
     border-radius: 0.4rem;
     border: none;
     margin: 0.6rem 0 0;
+  }
+
+  &__buy-button:hover {
+    cursor: pointer;
   }
 }

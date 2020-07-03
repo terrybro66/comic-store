@@ -7,7 +7,7 @@ const Comic = ({ data: { id, name, description, cover, price } }) => (
     <Link to={`/comics/${id}`}>
       <img src={cover} alt="cover" className={styles["comic__cover"]} />
     </Link>
-    <div className={styles["comic__description"]}>{description}</div>
+    <div className={styles["comic__name"]}>{name}</div>
     <div className={styles["comic__price"]}>&pound;{price}</div>
     <button className={styles["comic__buy-button"]}>BUY NOW</button>
   </div>

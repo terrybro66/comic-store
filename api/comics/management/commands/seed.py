@@ -46,5 +46,5 @@ def run_seed(self, mode):
     clear_data()
     if mode == MODE_CLEAR:
         return
-    for i in range(15):
+    for i in range(50):
         create_comic()

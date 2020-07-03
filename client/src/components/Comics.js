@@ -38,8 +38,18 @@ function Comics() {
     setCurrentPage(1);
     setSearchString(term);
   };
-  const comicsContainer = { display: "flex", justifyContent: "center" };
-  const comicsHeader = { textAlign: "left" };
+  const comicsContainer = {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    maxWidth: "1084px",
+    margin: "0 auto",
+  };
+  const comicsHeader = {
+    maxWidth: "1084px",
+    textAlign: "left",
+    margin: "0 auto",
+  };
 
   const renderContent = () => {
     if (isLoading) return <Loading />;
