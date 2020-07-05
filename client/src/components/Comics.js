@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Comic from "./Comic.js";
-import Search from "./Search";
 import comicsApi from "../utils/api/comics";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
 
-function Comics() {
+const Comics = (searchString) => {
   const [comics, setComics] = useState([]);
-  const [searchString, setSearchString] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,10 +33,6 @@ function Comics() {
     setIsLoading(false);
   };
 
-  const handleSearch = (term) => {
-    setCurrentPage(1);
-    setSearchString(term);
-  };
   const comicsContainer = {
     display: "flex",
     flexWrap: "wrap",
@@ -74,12 +68,7 @@ function Comics() {
     );
   };
 
-  return (
-    <div>
-      <Search onSubmit={handleSearch} />
-      {renderContent()}
-    </div>
-  );
-}
+  return <div>{renderContent()}</div>;
+};
 
 export default Comics;

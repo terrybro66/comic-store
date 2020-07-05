@@ -1,13 +1,15 @@
 import React from "react";
-import { SearchComics } from "./styledComponents";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Search = ({ onSubmit }) => {
-  const [searchString, setSearchString] = useState("test");
+  const [searchString, setSearchString] = useState("");
 
   const handleSubmit = () => {
     onSubmit(searchString);
   };
+  useEffect(() => {
+    handleSubmit();
+  }, []);
 
   const handleChange = ({ target }) => {
     setSearchString(target.value);
@@ -19,7 +21,7 @@ const Search = ({ onSubmit }) => {
 
   return (
     <div>
-      <SearchComics
+      <input
         id="searchId"
         type="search"
         placeholder="search comics"
