@@ -31,17 +31,19 @@ const Detail = ({ match }) => {
         <div className={styles["detail__cover"]}>
           <h1 className={styles["detail__title"]}>{comic.name}</h1>
           <p>
-            <strong>Publisher:</strong> {comic.publisher}
+            <span className={styles["detail__bold"]}>Publisher: </span>
+            {comic.publisher}
           </p>
           <p>
-            <strong>Stock status: </strong>
+            <span className={styles["detail__bold"]}>Stock status: </span>
             <span className={styles["detail__instock"]}>In Stock</span>
           </p>
           <p>
-            <strong>Delivery: FREE UK </strong>1st Class delivery on this item
+            <span className={styles["detail__bold"]}>Delivery: FREE UK </span>
+            1st Class delivery on this item
           </p>
           <p>
-            <strong>Price: &nbsp;</strong>
+            <span className={styles["detail__bold"]}>Price: &nbsp;</span>
             <span className={styles["detail__price"]}>
               &pound;{comic.price}
             </span>

@@ -24,6 +24,7 @@ function Comics() {
         params: {
           page: currentPage,
           search: searchString,
+          size: 12,
         },
       });
       setComics(response.data.results);
@@ -42,11 +43,11 @@ function Comics() {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    maxWidth: "1084px",
+    maxWidth: "108rem",
     margin: "0 auto",
   };
   const comicsHeader = {
-    maxWidth: "1084px",
+    maxWidth: "108rem",
     textAlign: "left",
     margin: "0 auto",
   };

@@ -1,21 +1,19 @@
 .comic {
-  padding: 12px;
-  text-align: center;
-  width: 180px;
-  height: 360px;
-
-  .comic:hover {
-    transform: scale(1.1);
-  }
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 18rem;
+  height: 36rem;
 
   &__cover {
-    max-height: 220px;
+    max-height: 22rem;
     width: auto;
-    transition: all 0.2s ease-in-out;
-  }
+    transition: transform 0.2s ease-in-out;
 
-  &__cover:hover {
-    transform: scale(1.1);
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &__name {
@@ -43,9 +41,5 @@
     border-radius: 0.4rem;
     border: none;
     margin: 0.6rem 0 0;
-  }
-
-  &__buy-button:hover {
-    cursor: pointer;
   }
 }
