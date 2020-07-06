@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 
 const Comics = () => {
   const [comics, setComics] = useState([]);
+
+  const [pageSize, setPageSize] = useState(6);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +19,7 @@ const Comics = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, searchTerm]);
+  }, [currentPage, searchTerm, pageSize]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -32,7 +34,7 @@ const Comics = () => {
         params: {
           page: currentPage,
           search: searchTerm,
-          size: 6,
+          size: pageSize,
         },
       });
       setComics(response.data.results);
@@ -61,7 +63,18 @@ const Comics = () => {
     if (comics.length === 0) return <div>No results found</div>;
     return (
       <div>
-        <h1 style={comicsHeader}>Your Results</h1>
+        <h1 style={comicsHeader}>
+          Your Results
+          <input
+            type="range"
+            min="6"
+            max="36"
+            step="6"
+            value={pageSize}
+            onChange={e => setPageSize(e.target.value)}
+          />
+          {pageSize}
+        </h1>
         <div style={comicsContainer}>
           {comics.map((comic) => (
             <Comic data={comic} key={`Comic-${comic.id}`} />
