@@ -19,9 +19,19 @@ function App() {
   return (
     <div>
       <Router>
-        <Logo />
-        <Nav />
-        <Search onSubmit={handleSearch} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#666",
+          }}
+        >
+          <Logo />
+          <Search onSubmit={handleSearch} />
+          <Nav />
+        </div>
+
         <Switch>
           <Route
             path="/"

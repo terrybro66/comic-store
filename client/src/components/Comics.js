@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import Loading from "./Loading";
 
 const Comics = (searchString) => {
+  console.log(searchString);
   const [comics, setComics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
@@ -15,14 +16,18 @@ const Comics = (searchString) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, searchString]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchString]);
+
   const fetchData = async () => {
     setIsLoading(true);
     try {
       const response = await comicsApi.get("", {
         params: {
           page: currentPage,
-          search: searchString,
-          size: 12,
+          search: searchString.searchString,
+          size: 6,
         },
       });
       setComics(response.data.results);
@@ -43,7 +48,7 @@ const Comics = (searchString) => {
   const comicsHeader = {
     maxWidth: "108rem",
     textAlign: "left",
-    margin: "0 auto",
+    margin: "2rem auto 0",
   };
 
   const renderContent = () => {

@@ -1,15 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import styles from "./Search.module.scss";
 
 const Search = ({ onSubmit }) => {
   const [searchString, setSearchString] = useState("");
+  const history = useHistory();
 
   const handleSubmit = () => {
     onSubmit(searchString);
+    history.push("/");
   };
-  useEffect(() => {
-    handleSubmit();
-  }, []);
 
   const handleChange = ({ target }) => {
     setSearchString(target.value);
@@ -20,15 +21,14 @@ const Search = ({ onSubmit }) => {
   };
 
   return (
-    <div>
+    <div className={styles["search"]}>
       <input
         id="searchId"
         type="search"
         placeholder="search comics"
-        onsearch="searchComics"
-        value={searchString}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        // onsearch={handleSubmit()}
       />
       <button onClick={handleSubmit}>search</button>
     </div>
