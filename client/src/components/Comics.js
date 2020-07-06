@@ -21,11 +21,11 @@ const Comics = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, searchTerm, pageSize]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-    setSearchTerm(location.state?.search || "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.state?.search]);
+useEffect(() => {
+  setCurrentPage(1);
+  setSearchTerm(location.state?.search || "");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [location.state?.search]);
 
   const fetchData = async () => {
     setIsLoading(true);
