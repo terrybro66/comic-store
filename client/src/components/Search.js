@@ -22,15 +22,17 @@ const Search = ({ onSubmit }) => {
 
   return (
     <div className={styles["search"]}>
-      <input
-        id="searchId"
-        type="search"
-        placeholder="search comics"
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        // onsearch={handleSubmit()}
-      />
-      <button onClick={handleSubmit}>search</button>
+      <form onSubmit=>
+        <input
+          id="searchId"
+          type="search"
+          placeholder="search comics"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          // onsearch={handleSubmit()}
+        />
+        <button onClick={handleSubmit}>search</button>
+      </form>
     </div>
   );
 };

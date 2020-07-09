@@ -4,7 +4,7 @@ import comicsApi from "../utils/api/comics";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
 
-const Comics = (searchString) => {
+const Comics = ({ searchString }) => {
   console.log(searchString);
   const [comics, setComics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +26,7 @@ const Comics = (searchString) => {
       const response = await comicsApi.get("", {
         params: {
           page: currentPage,
-          search: searchString.searchString,
+          search: searchString,
           size: 6,
         },
       });
