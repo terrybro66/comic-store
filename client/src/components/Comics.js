@@ -67,9 +67,9 @@ useEffect(() => {
           Your Results
           <input
             type="range"
-            min="6"
-            max="36"
-            step="6"
+            min={6}
+            max={36}
+            step={6}
             value={pageSize}
             onChange={e => setPageSize(e.target.value)}
           />
