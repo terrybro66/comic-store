@@ -3,22 +3,25 @@ import Comic from "./Comic.js";
 import comicsApi from "../utils/api/comics";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
+import { useLocation } from "react-router-dom";
 
-const Comics = (searchString) => {
-  console.log(searchString);
+const Comics = () => {
   const [comics, setComics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  const location = useLocation();
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, searchString]);
-
+  }, [currentPage]);
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchString]);
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.state.search]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -26,7 +29,7 @@ const Comics = (searchString) => {
       const response = await comicsApi.get("", {
         params: {
           page: currentPage,
-          search: searchString.searchString,
+          search: location.state.search,
           size: 6,
         },
       });
