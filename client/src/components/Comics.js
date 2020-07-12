@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Comic from "./Comic.js";
 import Search from "./Search";
-import comicsApi from "../utils/api/comics";
+import fetcher from "../utils/api/fetcher";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext.js";
 
 function Comics() {
+  const { user } = useContext(AuthContext);
   const [comics, setComics] = useState([]);
   const [searchString, setSearchString] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,12 +18,12 @@ function Comics() {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, searchString]);
+  }, [user, currentPage, searchString]);
 
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await comicsApi.get("", {
+      const response = await fetcher.get("comics", {
         params: {
           page: currentPage,
           search: searchString,
@@ -30,7 +33,7 @@ function Comics() {
       setComics(response.data.results);
       setPageCount(response.data.total_pages);
     } catch (e) {
-      console.log(e);
+      if (e.response.status === 401) setComics([]);
     }
     setIsLoading(false);
   };
@@ -54,10 +57,10 @@ function Comics() {
 
   const renderContent = () => {
     if (isLoading) return <Loading />;
-    if (comics.length === 0) return <div>No results found</div>;
+    if (!user || comics.length === 0) return <div>No results found</div>;
     return (
       <div>
-        <h1 style={comicsHeader}>Your Results</h1>
+        <h1 style={comicsHeader}>Hi {user.username}, here are your results</h1>
         <div style={comicsContainer}>
           {comics.map((comic) => (
             <Comic data={comic} key={`Comic-${comic.id}`} />
