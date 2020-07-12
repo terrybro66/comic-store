@@ -9,4 +9,5 @@ router.register('comics', views.ComicView)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('account/register', views.UserCreate.as_view())
 ]
