@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Comic
-from .serializers import ComicSerializer
-from rest_framework import filters
-from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+from .serializers import ComicSerializer, UserSerializer
+from rest_framework import filters, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 class ComicView(viewsets.ModelViewSet):
@@ -12,3 +13,9 @@ class ComicView(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     queryset = Comic.objects.all()
     serializer_class = ComicSerializer
+
+
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (AllowAny, )
