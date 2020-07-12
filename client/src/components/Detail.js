@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import comicsApi from "../utils/api/comics";
+import fetcher from "../utils/api/fetcher";
 import styles from "./Detail.module.scss";
 
 const Detail = ({ match }) => {
@@ -12,7 +12,7 @@ const Detail = ({ match }) => {
 
   const fetchData = async () => {
     try {
-      const { data } = await comicsApi.get(match.params.id);
+      const { data } = await fetcher.get(`comics/${match.params.id}`);
       setComic(data);
     } catch (error) {
       console.log("error", error);

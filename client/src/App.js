@@ -7,9 +7,11 @@ import Profile from "./components/Profile";
 import Cart from "./components/Cart";
 import SiteHeader from "./components/SiteHeader";
 
+import AuthContextProvider from "./contexts/AuthContext";
+
 function App() {
   return (
-    <div>
+    <AuthContextProvider>
       <Router>
         <SiteHeader />
         <Switch>
@@ -19,7 +21,7 @@ function App() {
           <Route path="/cart" exact component={Cart} />
         </Switch>
       </Router>
-    </div>
+    </AuthContextProvider>
   );
 }
 
