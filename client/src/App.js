@@ -5,9 +5,7 @@ import Comics from "./components/Comics";
 import Detail from "./components/Detail";
 import Profile from "./components/Profile";
 import Cart from "./components/Cart";
-import Nav from "./components/Nav";
-import Logo from "./components/Logo";
-import Search from "./components/Search";
+import SiteHeader from "./components/SiteHeader";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,19 +17,7 @@ function App() {
   return (
     <div>
       <Router>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#666",
-          }}
-        >
-          <Logo />
-          <Search onSubmit={handleSearch} />
-          <Nav />
-        </div>
-
+        <SiteHeader />
         <Switch>
           <Route
             path="/"

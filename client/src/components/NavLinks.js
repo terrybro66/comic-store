@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./Nav.module.scss";
+import styles from "./NavLinks.module.scss";
 
-const Nav = () => {
+const NavLinks = () => {
   return (
-    <div className={styles["nav"]}>
+    <div className={styles.navLinks}>
       <Link to="/">Home | </Link>
       <Link to="/profile">Profile | </Link>
       <Link to="/cart">Cart</Link>
@@ -12,4 +12,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default NavLinks;
