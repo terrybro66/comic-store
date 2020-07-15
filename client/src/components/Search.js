@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styles from "./Search.module.scss";
@@ -10,6 +10,8 @@ const Search = () => {
   const handleSubmit = () => {
     history.push("/", { search: searchString });
   };
+
+  useEffect(handleSubmit, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = ({ target }) => {
     setSearchString(target.value);

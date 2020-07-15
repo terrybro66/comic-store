@@ -10,18 +10,20 @@ const Comics = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const location = useLocation();
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, searchTerm]);
+
   useEffect(() => {
     setCurrentPage(1);
-    fetchData();
+    setSearchTerm(location.state?.search);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.state.search]);
+  }, [location.state?.search]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -29,7 +31,7 @@ const Comics = () => {
       const response = await comicsApi.get("", {
         params: {
           page: currentPage,
-          search: location.state.search,
+          search: searchTerm,
           size: 6,
         },
       });
