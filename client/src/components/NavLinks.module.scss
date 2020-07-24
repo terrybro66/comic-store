@@ -1,5 +1,17 @@
 .navLinks {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #fff;
   padding: 2.2rem;
+}
+
+.navLinks select option {
+  margin-left: 1rem;
+  border-radius: 4px;
+  color: #01a418;
+  border: 0;
+}
+.navLinks select {
+  margin-left: 1rem;
+  border-radius: 4px;
+  border: 0;
 }
