@@ -1,7 +1,6 @@
-import React, { createContext } from "react";
-import { useReducer } from "react";
-import { useEffect } from "react";
+import React, { createContext, useReducer, useEffect, useContext } from "react";
 import jwtDecode from "jwt-decode";
+
 import fetcher from "../utils/api/fetcher";
 
 export const AuthContext = createContext({});
@@ -49,4 +48,8 @@ export default function AuthContextProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
 }

@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { AuthContext } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./NavLinks.module.scss";
 
 const NavLinks = () => {
   const history = useHistory();
-  const { user, removeUser } = useContext(AuthContext);
+  const { user, removeUser } = useAuth();
 
   const takeAction = (action) => {
     console.log(action);

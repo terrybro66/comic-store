@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+
+import { useAuth } from "../contexts/AuthContext";
 import fetcher from "../utils/api/fetcher";
 
 const LogIn = () => {
   const history = useHistory();
-  const { saveUser } = useContext(AuthContext);
+  const { saveUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
