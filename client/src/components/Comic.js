@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Comic.module.scss";
 
-const Comic = ({ data: { id, name, description, cover, price } }) => (
+const Comic = ({ data: { id, name, cover, price } }) => (
   <div className={styles["comic"]}>
     <Link to={`/comics/${id}`}>
       <img src={cover} alt="cover" className={styles["comic__cover"]} />

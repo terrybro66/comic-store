@@ -16,5 +16,8 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "unicorn/consistent-function-scoping": 0,
+    "no-console": 0
+  },
 };
