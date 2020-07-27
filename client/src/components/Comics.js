@@ -4,6 +4,7 @@ import comicsApi from "../utils/api/comics";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
 import { useLocation } from "react-router-dom";
+import styles from "./Comics.module.scss";
 
 const Comics = () => {
   const [comics, setComics] = useState([]);
@@ -21,11 +22,15 @@ const Comics = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, searchTerm, pageSize]);
 
-useEffect(() => {
-  setCurrentPage(1);
-  setSearchTerm(location.state?.search || "");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [location.state?.search]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pageSize]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setSearchTerm(location.state?.search || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.state?.search]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -39,23 +44,10 @@ useEffect(() => {
       });
       setComics(response.data.results);
       setPageCount(response.data.total_pages);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
     setIsLoading(false);
-  };
-
-  const comicsContainer = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    maxWidth: "108rem",
-    margin: "0 auto",
-  };
-  const comicsHeader = {
-    maxWidth: "108rem",
-    textAlign: "left",
-    margin: "2rem auto 0",
   };
 
   const renderContent = () => {
@@ -63,30 +55,32 @@ useEffect(() => {
     if (comics.length === 0) return <div>No results found</div>;
     return (
       <div>
-        <h1 style={comicsHeader}>
-          Your Results
-          <input
-            type="range"
-            min={6}
-            max={36}
-            step={6}
-            value={pageSize}
-            onChange={e => setPageSize(e.target.value)}
-          />
-          {pageSize}
-        </h1>
-        <div style={comicsContainer}>
+        <h1 className={styles["comics__header"]}>Your Results</h1>
+        <div className={styles["comics__settings"]}>
+          <div className={styles["comics__pagesize"]}>
+            <div>{pageSize}</div>
+            <input
+              type="range"
+              min={6}
+              max={36}
+              step={6}
+              value={pageSize}
+              onChange={(e) => setPageSize(e.target.value)}
+            />
+          </div>
+          {pageCount && (
+            <Pagination
+              pageCount={pageCount}
+              onUpdate={setCurrentPage}
+              currentPage={currentPage}
+            />
+          )}
+        </div>
+        <div className={styles["comics__container"]}>
           {comics.map((comic) => (
             <Comic data={comic} key={`Comic-${comic.id}`} />
           ))}
         </div>
-        {pageCount && (
-          <Pagination
-            pageCount={pageCount}
-            onUpdate={setCurrentPage}
-            currentPage={currentPage}
-          />
-        )}
       </div>
     );
   };
