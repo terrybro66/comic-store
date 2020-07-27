@@ -16,6 +16,7 @@ const Comics = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const location = useLocation();
+  const searchParam = location.state?.search;
 
   useEffect(() => {
     fetchData();
@@ -24,13 +25,12 @@ const Comics = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [pageSize]);
+  }, [pageSize, searchParam]);
 
   useEffect(() => {
-    setCurrentPage(1);
-    setSearchTerm(location.state?.search || "");
+    setSearchTerm(searchParam || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.state?.search]);
+  }, [searchParam]);
 
   const fetchData = async () => {
     setIsLoading(true);
