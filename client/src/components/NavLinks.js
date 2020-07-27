@@ -1,8 +1,7 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { AuthContext } from "../contexts/AuthContext";
-import fetcher from "../utils/api/fetcher";
 import styles from "./NavLinks.module.scss";
 
 const NavLinks = () => {
@@ -14,10 +13,15 @@ const NavLinks = () => {
     switch (action) {
       case 1:
         history.push("/orders");
+        break;
       case 2:
         history.push("/profile");
+        break;
       case 3:
         removeUser();
+        break;
+      default:
+        return;
     }
   };
 

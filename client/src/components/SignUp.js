@@ -10,7 +10,7 @@ const SignUp = () => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const handleLogIn = async ({}) => {
+  const handleLogIn = async () => {
     const { data } = await fetcher.post("login/", {
       username,
       password1,
@@ -27,8 +27,8 @@ const SignUp = () => {
         password2,
       });
       handleLogIn({ username, password: password1 });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import fetcher from "../utils/api/fetcher";
@@ -7,11 +7,9 @@ import Comic from "./Comic.js";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
 
-import { AuthContext } from "../contexts/AuthContext.js";
 import styles from "./Comics.module.scss";
 
 function Comics() {
-  const { user } = useContext(AuthContext);
   const [comics, setComics] = useState([]);
 
   const [pageSize, setPageSize] = useState(6);
@@ -51,13 +49,13 @@ function Comics() {
       setPageCount(response.data.total_pages);
     } catch (error) {
       console.log(error);
-
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   if (isLoading) return <Loading />;
-  if (!user || comics.length === 0) return <div>No results found</div>;
+  if (comics.length === 0) return <div>No results found</div>;
+
   return (
     <div>
       <h1 className={styles["comics__header"]}>Your Results</h1>
