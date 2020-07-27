@@ -20,7 +20,7 @@ const Search = () => {
   };
 
   return (
-    <div className={styles["search"]}>
+    <div className={styles.search}>
       <input
         id="searchId"
         type="search"

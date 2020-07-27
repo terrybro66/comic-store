@@ -21,7 +21,7 @@ const Comics = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-    setSearchTerm(location.state?.search);
+    setSearchTerm(location.state?.search || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.state?.search]);
 
