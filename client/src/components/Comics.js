@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Comic from "./Comic.js";
-import Search from "./Search";
 import comicsApi from "../utils/api/comics";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
+import { useLocation } from "react-router-dom";
 
-function Comics() {
+const Comics = () => {
   const [comics, setComics] = useState([]);
-  const [searchString, setSearchString] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const location = useLocation();
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, searchString]);
+  }, [currentPage, searchTerm]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setSearchTerm(location.state?.search || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.state?.search]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -23,8 +31,8 @@ function Comics() {
       const response = await comicsApi.get("", {
         params: {
           page: currentPage,
-          search: searchString,
-          size: 12,
+          search: searchTerm,
+          size: 6,
         },
       });
       setComics(response.data.results);
@@ -35,10 +43,6 @@ function Comics() {
     setIsLoading(false);
   };
 
-  const handleSearch = (term) => {
-    setCurrentPage(1);
-    setSearchString(term);
-  };
   const comicsContainer = {
     display: "flex",
     flexWrap: "wrap",
@@ -49,7 +53,7 @@ function Comics() {
   const comicsHeader = {
     maxWidth: "108rem",
     textAlign: "left",
-    margin: "0 auto",
+    margin: "2rem auto 0",
   };
 
   const renderContent = () => {
@@ -74,12 +78,7 @@ function Comics() {
     );
   };
 
-  return (
-    <div>
-      <Search onSubmit={handleSearch} />
-      {renderContent()}
-    </div>
-  );
-}
+  return <div>{renderContent()}</div>;
+};
 
 export default Comics;

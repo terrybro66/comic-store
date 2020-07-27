@@ -1,12 +1,14 @@
 import React from "react";
-import { SearchComics } from "./styledComponents";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import styles from "./Search.module.scss";
 
-const Search = ({ onSubmit }) => {
-  const [searchString, setSearchString] = useState("test");
+const Search = () => {
+  const history = useHistory();
+  const [searchString, setSearchString] = useState("");
 
   const handleSubmit = () => {
-    onSubmit(searchString);
+    history.push("/", { search: searchString });
   };
 
   const handleChange = ({ target }) => {
@@ -18,13 +20,11 @@ const Search = ({ onSubmit }) => {
   };
 
   return (
-    <div>
-      <SearchComics
+    <div className={styles.search}>
+      <input
         id="searchId"
         type="search"
         placeholder="search comics"
-        onsearch="searchComics"
-        value={searchString}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
