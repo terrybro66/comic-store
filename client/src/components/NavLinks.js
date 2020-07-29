@@ -19,6 +19,7 @@ const NavLinks = () => {
         break;
       case 3:
         removeUser();
+        history.push("/");
         break;
       default:
         return;
