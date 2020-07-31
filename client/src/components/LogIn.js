@@ -17,7 +17,7 @@ const LogIn = () => {
 
   const handleChange = (e) => {
     console.log(e.currentTarget.value);
-    setFormData;
+    // setFormData;
   };
 
   const handleLogIn = async (e) => {
