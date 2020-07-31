@@ -17,11 +17,11 @@ const LogIn = () => {
 
   const handleChange = (e) => {
     console.log(e.currentTarget.value);
+    setFormData;
   };
 
   const handleLogIn = async (e) => {
     e.preventDefault();
-
     const { data } = await fetcher.post("login/", {
       // username,
       // password,
@@ -39,7 +39,7 @@ const LogIn = () => {
           <Field key={field.label} field={field} onChange={handleChange} />
         ))}
 
-        <input type="submit" value={data.buttonText} />
+        <input type="submit" value={data.buttonValue} />
         <div className={styles.signup}>
           Not registered? <Link to={"/sign-up"}>Sign up here</Link>
         </div>
