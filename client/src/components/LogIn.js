@@ -1,33 +1,33 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
-import { useAuth } from "../contexts/AuthContext";
 import fetcher from "../utils/api/fetcher";
+import { useAuth } from "../contexts/AuthContext";
 import styles from "./LogIn.module.scss";
 import formData from "./formData";
 import Field from "./Field";
 
 const LogIn = () => {
-  const history = useHistory();
   const { saveUser } = useAuth();
+  const history = useHistory();
 
   const { data, fields } = formData;
 
   // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
 
+  const handleChange = (e) => {
+    console.log(e.currentTarget.value);
+  };
+
   const handleLogIn = async (e) => {
     e.preventDefault();
-    console.log(datum);
+
     const { data } = await fetcher.post("login/", {
       // username,
       // password,
     });
     saveUser(data.access);
     history.push("/");
-  };
-  const handleChange = (e) => {
-    console.log(e.currentTarget.value);
   };
 
   return (
