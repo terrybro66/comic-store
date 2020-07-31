@@ -5,21 +5,13 @@ import { useAuth } from "../contexts/AuthContext";
 import fetcher from "../utils/api/fetcher";
 import styles from "./LogIn.module.scss";
 import formData from "./formData";
+import Field from "./Field";
 
 const LogIn = () => {
   const history = useHistory();
   const { saveUser } = useAuth();
 
   const { data, fields } = formData;
-  console.log("fields", fields);
-
-  const [datum, setData] = useState(
-    fields.map((field) => ({
-      ...field,
-      name: field.name,
-      value: "",
-    }))
-  );
 
   // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
@@ -28,7 +20,7 @@ const LogIn = () => {
     e.preventDefault();
     console.log(datum);
     const { data } = await fetcher.post("login/", {
-      // datum,
+      // username,
       // password,
     });
     saveUser(data.access);
@@ -36,17 +28,6 @@ const LogIn = () => {
   };
   const handleChange = (e) => {
     console.log(e.currentTarget.value);
-  };
-
-  const Field = ({ field, onChange }) => {
-    const { label, ...attributes } = field;
-
-    return (
-      <>
-        <label>{label}</label>
-        <input onChange={onChange} {...attributes} />
-      </>
-    );
   };
 
   return (
