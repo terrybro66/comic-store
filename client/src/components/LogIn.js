@@ -26,7 +26,7 @@ const LogIn = ({ formData }) => {
 
   return (
     <div className={styles.darkTheme}>
-      <form onSubmit={(e) => formData.login(e, fields)}>
+      <form onSubmit={(e) => formData.login(e, fields, history, saveUser)}>
         <h1>{formData.data.title}</h1>
 
         {fields.map((field) => (
