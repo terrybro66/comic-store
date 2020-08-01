@@ -6,8 +6,9 @@ import Orders from "./components/Orders";
 import Comics from "./components/Comics";
 import Detail from "./components/Detail";
 import LogIn from "./components/LogIn";
-import SignUp from "./components/SignUp";
 import SiteHeader from "./components/SiteHeader";
+import formData from "./components/formData";
+import formData2 from "./components/formData2";
 
 import AuthContextProvider from "./contexts/AuthContext";
 
@@ -20,8 +21,14 @@ function App() {
           <Route path="/" exact component={Comics} />
           <Route path="/orders" exact component={Orders} />
           <Route path="/profile" exact component={Profile} />
-          <Route path="/log-in" component={LogIn} />
-          <Route path="/sign-up" component={SignUp} />
+          <Route
+            path="/log-in"
+            render={(props) => <LogIn formData={formData} />}
+          />
+          <Route
+            path="/sign-up"
+            render={(props) => <LogIn formData={formData2} />}
+          />{" "}
           <Route path="/comics/:id" exact component={Detail} />
         </Switch>
       </Router>
