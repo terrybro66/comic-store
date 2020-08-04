@@ -43,8 +43,27 @@ export default function AuthContextProvider({ children }) {
     dispatch({ type: AUTH_TYPES.signOut });
   };
 
+  const logIn = async (username, password) => {
+    const { data } = await fetcher.post("login/", {
+      username,
+      password,
+    });
+    saveUser(data.access);
+  };
+
+  const signUp = async (username, password1, password2) => {
+    await fetcher.post("signup/", {
+      username,
+      password1,
+      password2,
+    });
+    logIn(username, password1);
+  };
+
   return (
-    <AuthContext.Provider value={{ user: state.user, saveUser, removeUser }}>
+    <AuthContext.Provider
+      value={{ user: state.user, logIn, signUp, removeUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

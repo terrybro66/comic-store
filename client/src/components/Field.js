@@ -1,12 +1,14 @@
 import React from "react";
 
-const Field = ({ field, onChange }) => {
-  const { label, ...attributes } = field;
-
+const Field = ({ type, label, value, onChange }) => {
   return (
     <>
       <label>{label}</label>
-      <input onChange={onChange} {...attributes} />
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </>
   );
 };
