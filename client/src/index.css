@@ -10,3 +10,10 @@ a {
 button:hover {
   cursor: pointer;
 }
+
+:root {
+  --darkBg: #01a418;
+  --darkColor: #fff;
+  --lightColor: #03520e;
+  --lightBg: #fff;
+}

@@ -1,14 +1,14 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
 
-const Profile = () => {
+const Orders = () => {
   const { user } = useAuth();
 
   return (
     <div>
-      <h1>Profile of {user.username}</h1>
+      <h1>Orders for {user.username}</h1>
     </div>
   );
 };
 
-export default Profile;
+export default Orders;
